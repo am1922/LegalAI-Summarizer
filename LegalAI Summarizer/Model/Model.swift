@@ -15,5 +15,6 @@ struct Document: Identifiable, Hashable {
     let number: String
     let title: String
     let content: String
+    let summary: [String]
     let views: Int
 }

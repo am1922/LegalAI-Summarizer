@@ -63,7 +63,7 @@ struct DocumentDetailView: View {
                     }
                     .padding(.bottom, 4)
                     
-                    ForEach(keyPoints, id: \.self) { point in
+                    ForEach(document.summary, id: \.self) { point in
                         HStack(alignment: .top, spacing: 8) {
                             Image(systemName: "circle.fill")
                                 .font(.system(size: 6))
@@ -100,17 +100,17 @@ struct DocumentDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    private var keyPoints: [String] {
-        [
-            "Установление порядка оказания медицинской помощи",
-            "Требования к квалификации медицинского персонала",
-            "Стандарты оснащения медицинских учреждений",
-            "Порядок взаимодействия между учреждениями"
-        ]
-    }
+//    private var keyPoints: [String] {
+//        [
+//            "Установление порядка оказания медицинской помощи",
+//            "Требования к квалификации медицинского персонала",
+//            "Стандарты оснащения медицинских учреждений",
+//            "Порядок взаимодействия между учреждениями"
+//        ]
+//    }
     
     private func shareContent() {
-        let text = keyPoints.joined(separator: "\n• ")
+        let text = document.summary.joined(separator: "\n• ")
         let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
