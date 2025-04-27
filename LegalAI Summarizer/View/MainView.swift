@@ -42,12 +42,30 @@ struct MainView: View {
                         .listRowSeparatorTint(.secondary.opacity(0.3))
                     }
                 } header: {
-                    Text("Сегодня опубликовано (\(documents.count))")
-                        .font(.headline)
+                    Text("Недавно опубликовано на pravo.gov.ru (\(documents.count))")
+                        .font(.subheadline .bold())
                         .foregroundColor(.primary)
                         .textCase(.none)
                         .padding(.vertical, 8)
                 }
+                
+                Section {
+                    ForEach(documents) { doc in
+                        NavigationLink {
+                            DocumentDetailView(document: doc)
+                        } label: {
+                            DocumentRow(document: doc)
+                        }
+                        .listRowSeparatorTint(.secondary.opacity(0.3))
+                    }
+                } header: {
+                    Text("Недавно опубликовано на regulation.gov.ru (\(documents.count))")
+                        .font(.subheadline .bold())
+                        .foregroundColor(.primary)
+                        .textCase(.none)
+                        .padding(.vertical, 8)
+                }
+                
             }
             .listStyle(.plain)
             .navigationTitle(headerTitle)
