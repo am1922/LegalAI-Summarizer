@@ -25,18 +25,20 @@ struct DocumentDetailView: View {
                     
                     HStack(spacing: 16) {
                         Text(document.type)
-                            .font(.body)
+                            .font(.subheadline)
                             .foregroundColor(.secondary)
                         
-                        Text(document.number)
-                            .font(.body.monospacedDigit())
+                        Text("от \(document.date)")
+                            .font(.subheadline)
                             .foregroundColor(.secondary)
                         
                         Spacer()
                         
-                        Text(document.date)
-                            .font(.body)
+                        Text(document.number)
+                            .font(.subheadline.monospacedDigit())
                             .foregroundColor(.secondary)
+                        
+                        
                     }
                 }
                 .padding(.bottom, 16)

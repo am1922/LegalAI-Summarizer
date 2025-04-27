@@ -26,7 +26,7 @@ struct DocumentRow: View {
             Text(document.title)
                 .font(.body)
                 .foregroundColor(.primary)
-                .lineLimit(2)
+                .lineLimit(5)
                 .padding(.vertical, 2)
             
             // Мета-информация
@@ -45,13 +45,6 @@ struct DocumentRow: View {
                 
                 Spacer()
                 
-                Image(systemName: "eye.fill")
-                    .font(.system(size: 12))
-                    .foregroundColor(.secondary)
-                
-                Text("\(document.views)")
-                    .font(.caption.monospacedDigit())
-                    .foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 8)
