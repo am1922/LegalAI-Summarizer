@@ -8,11 +8,112 @@
 import SwiftUI
 
 struct DocumentDetailView: View {
+    let document: Document
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                // Шапка документа
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(document.organ)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Text(document.title)
+                        .font(.title2.weight(.semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    HStack(spacing: 16) {
+                        Text(document.type)
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                        
+                        Text(document.number)
+                            .font(.body.monospacedDigit())
+                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                        
+                        Text(document.date)
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .padding(.bottom, 16)
+                
+                // Ключевые положения
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text("Ключевые положения")
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        // Кнопка "Поделиться"
+                        Button(action: {
+                            shareContent()
+                        }) {
+                            Image(systemName: "square.and.arrow.up")
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.blue)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.bottom, 4)
+                    
+                    ForEach(keyPoints, id: \.self) { point in
+                        HStack(alignment: .top, spacing: 8) {
+                            Image(systemName: "circle.fill")
+                                .font(.system(size: 6))
+                                .padding(.top, 6)
+                            
+                            Text(point)
+                                .font(.body)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .foregroundColor(.primary)
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(.secondarySystemBackground))
+                )
+                
+                // Полный текст
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Полный текст документа")
+                        .font(.headline)
+                        .padding(.bottom, 4)
+                    
+                    Text(document.content)
+                        .font(.body)
+                        .lineSpacing(6)
+                }
+                .padding(.top, 16)
+            }
+            .padding()
+        }
+        .navigationTitle("Документ")
+        .navigationBarTitleDisplayMode(.inline)
     }
-}
-
-#Preview {
-    DocumentDetailView()
+    
+    private var keyPoints: [String] {
+        [
+            "Установление порядка оказания медицинской помощи",
+            "Требования к квалификации медицинского персонала",
+            "Стандарты оснащения медицинских учреждений",
+            "Порядок взаимодействия между учреждениями"
+        ]
+    }
+    
+    private func shareContent() {
+        let text = keyPoints.joined(separator: "\n• ")
+        let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController {
+            rootViewController.present(activityVC, animated: true)
+        }
+    }
 }
