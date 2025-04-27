@@ -100,14 +100,6 @@ struct DocumentDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-//    private var keyPoints: [String] {
-//        [
-//            "Установление порядка оказания медицинской помощи",
-//            "Требования к квалификации медицинского персонала",
-//            "Стандарты оснащения медицинских учреждений",
-//            "Порядок взаимодействия между учреждениями"
-//        ]
-//    }
     
     private func shareContent() {
         let text = document.summary.joined(separator: "\n• ")
